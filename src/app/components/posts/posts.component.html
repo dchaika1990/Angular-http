@@ -1,0 +1,103 @@
+<div class="container">
+
+  <!-- Form -->
+
+  <form class="mt-5 mb-5" novalidate #form="ngForm" (ngSubmit)="addPost(form)">
+
+    <!-- Errors -->
+
+    <div class="alert alert-danger"
+         *ngIf="postTitle.errors?.required && postTitle.touched"
+    >
+      Please enter title
+    </div>
+    <div class="alert alert-danger"
+         *ngIf="postBody.errors?.required && postBody.touched"
+    >
+      Please enter text
+    </div>
+
+    <div class="alert alert-success"
+         *ngIf="addSuccess"
+    >
+      Post add success
+    </div>
+    <div class="alert alert-danger"
+         *ngIf="addError"
+    >
+      Post did not added
+    </div>
+
+    <div class="alert alert-success"
+         *ngIf="deleteSuccess"
+    >
+      Post deleted success
+    </div>
+    <div class="alert alert-danger"
+         *ngIf="deleteError"
+    >
+      Post did not deleted
+    </div>
+
+    <!-- Inputs -->
+
+    <div class="form-group">
+      <label>Title</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="post.title"
+        name="title"
+        #postTitle="ngModel"
+        required
+      >
+    </div>
+    <div class="form-group">
+      <label>Text</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="post.body"
+        name="body"
+        #postBody="ngModel"
+        required
+      >
+    </div>
+    <button [disabled]="form.invalid" class="btn btn-primary">Add post</button>
+
+  </form>
+
+  <!-- Post-list -->
+
+  <div class="posts-list">
+    <div class="card bg-light mb-3" *ngFor="let post of posts; let i = index">
+      <div class="card-header">
+        <span>{{ post.title }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="post.title"
+          name="title"
+          #postTitle="ngModel"
+        >
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <span>{{ post.body }}</span>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="post.body"
+            name="body"
+            #postBody="ngModel"
+
+          >
+        </p>
+        <button class="btn btn-danger" (click)="deletePost(post, i)">Delete</button>
+        <button class="btn btn-primary" #edit>Edit</button>
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+</div>

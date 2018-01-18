@@ -1,0 +1,52 @@
+<div class="container">
+  <form class="mt-3 mb-5" novalidate #form="ngForm" (ngSubmit)="addTodo(form)">
+    <div class="alert alert-danger"
+      *ngIf="todoTitle.errors?.required && todoTitle.touched"
+    >
+      Please enter title
+    </div>
+    <div class="alert alert-success"
+         *ngIf="addSuccess"
+    >
+      Task add success
+    </div>
+    <div class="alert alert-danger"
+         *ngIf="addError"
+    >
+      Task did not added
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.title"
+        name="title"
+        #todoTitle = "ngModel"
+        required
+      >
+    </div>
+    <button [disabled]="form.invalid" class="btn btn-primary">Add todo</button>
+  </form>
+  <div class="todo-list">
+    <div class="card mb-3"
+         *ngFor="let todo of todos; let i = index"
+         [ngClass]="{'bg-secondary': !todo.completed, 'bg-success': todo.completed}"
+    >
+      <div class="card-body">
+        <p class="card-text text-white" *ngIf="!todo.editting">{{ todo.title }}</p>
+        <p><input
+          type="text"
+          class="form-control"
+          [(ngModel)]="todo.title"
+          name="title"
+          #todoTitle = "ngModel"
+          *ngIf="todo.editting"
+        ></p>
+        <button href="#" class="btn btn-danger" (click)="deleteTodo(todo, i)">Delete</button>
+        <button href="#" class="btn btn-primary" (click)="todo.editting">Edit</button>
+        <button href="#" class="btn btn-primary" (click)="todo.completed = !todo.completed; editTodo(todo)">{{ todo.completed ? 'Undone' : 'Done' }}</button>
+      </div>
+    </div>
+  </div>
+</div>
