@@ -17,6 +17,7 @@ export class PostsComponent implements OnInit {
   addError: boolean = false;
   deleteSuccess: boolean = false;
   deleteError: boolean = false;
+  edit:boolean = false;
 
   constructor(
     public postsService: PostsDataService
@@ -62,6 +63,14 @@ export class PostsComponent implements OnInit {
       setTimeout(()=>{
         this.deleteError = false;
       }, 4000)
+    })
+  }
+
+  editPost(post){
+    this.postsService.editPost(post).subscribe(post=>{
+      console.log(post)
+    }, error=>{
+      console.log(error);
     })
   }
 
