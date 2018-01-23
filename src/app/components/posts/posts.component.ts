@@ -11,7 +11,8 @@ export class PostsComponent implements OnInit {
   posts:any;
   post = {
     title: '',
-    body: ''
+    body: '',
+    edit: false
   };
   addSuccess:boolean = false;
   addError: boolean = false;

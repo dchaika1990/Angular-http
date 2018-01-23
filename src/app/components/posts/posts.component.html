@@ -72,31 +72,31 @@
   <div class="posts-list">
     <div class="card bg-light mb-3" *ngFor="let post of posts; let i = index">
       <div class="card-header">
-        <span *ngIf="!edit">{{ post.title }}</span>
+        <span *ngIf="!post.edit">{{ post.title }}</span>
         <input
           type="text"
           class="form-control"
           [(ngModel)]="post.title"
           name="title"
           #postTitle="ngModel"
-          *ngIf="edit"
+          *ngIf="post.edit"
         >
       </div>
       <div class="card-body">
         <p class="card-text">
-          <span *ngIf="!edit">{{ post.body }}</span>
+          <span *ngIf="!post.edit">{{ post.body }}</span>
           <input
             type="text"
             class="form-control"
             [(ngModel)]="post.body"
             name="body"
             #postBody="ngModel"
-            *ngIf="edit"
+            *ngIf="post.edit"
           >
         </p>
         <button class="btn btn-danger" (click)="deletePost(post, i)">Delete</button>
-        <button class="btn btn-primary" >Edit</button>
-        <button class="btn btn-primary" >Save</button>
+        <button class="btn btn-primary" (click)="post.edit = true">Edit</button>
+        <button class="btn btn-primary" (click)="post.edit = false; editPost(post)">Save</button>
       </div>
     </div>
   </div>
