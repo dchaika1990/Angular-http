@@ -36,7 +36,18 @@
     <div class="alert alert-danger"
          *ngIf="deleteError"
     >
-      Post did not deleted
+      Post did not delete
+    </div>
+
+    <div class="alert alert-success"
+         *ngIf="saveSuccess"
+    >
+      Post saved success
+    </div>
+    <div class="alert alert-danger"
+         *ngIf="saveError"
+    >
+      Post did not save
     </div>
 
     <!-- Inputs -->
@@ -94,9 +105,11 @@
             *ngIf="post.edit"
           >
         </p>
+
         <button class="btn btn-danger" (click)="deletePost(post, i)">Delete</button>
         <button class="btn btn-primary" (click)="post.edit = true">Edit</button>
         <button class="btn btn-primary" (click)="post.edit = false; editPost(post)">Save</button>
+
       </div>
     </div>
   </div>

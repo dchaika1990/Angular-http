@@ -18,6 +18,8 @@ export class PostsComponent implements OnInit {
   addError: boolean = false;
   deleteSuccess: boolean = false;
   deleteError: boolean = false;
+  saveSuccess:boolean = false;
+  saveError:boolean = false;
   edit:boolean = false;
 
   constructor(
@@ -69,9 +71,17 @@ export class PostsComponent implements OnInit {
 
   editPost(post){
     this.postsService.editPost(post).subscribe(post=>{
-      console.log(post)
+      console.log(post);
+      this.saveSuccess = true;
+      setTimeout(()=>{
+        this.saveSuccess = false;
+      },4000)
     }, error=>{
       console.log(error);
+      this.saveError = true;
+      setTimeout(()=>{
+        this.saveError = false;
+      },4000)
     })
   }
 
